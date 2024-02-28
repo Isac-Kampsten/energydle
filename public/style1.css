@@ -45,3 +45,30 @@ a:hover {
   background-color: #777;
 }
 
+#home-gamemodes-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #b4b4b4;
+  height: 100%;
+}
+
+#home-gamemodes-container li{
+  margin-top: 100px;
+}
+
+#home-gamemodes-container li a{
+  font-size: 3rem;
+}
+
+#home-gamemodes-container h1{
+  font-size: 5rem;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
