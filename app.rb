@@ -20,6 +20,10 @@ get('/login') do
     slim(:login)
 end
 
+get('/classic') do
+    slim(:classic)
+end
+
 post('/users/new') do
     username = params[:username]
     password = params[:password]
