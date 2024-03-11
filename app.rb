@@ -41,7 +41,7 @@ end
 post('/login') do
     username = params[:username]
     password = params[:password]
-    db = SQLite3::Database.new('db/energydle_db.db')
+    db = SQLite3::Database.new('db/energydle.db')
     db.results_as_hash = true
     result = db.execute("SELECT * FROM users WHERE username = ?",username).first
     pwdigest = result["pwdigest"]
