@@ -32,7 +32,7 @@ post('/users/new') do
     if password == password_confirm
         #lägg till användare
         password_digest = BCrypt::Password.create(password)
-        db = SQLite3::Database.new('db/energydle_db.db')
+        db = SQLite3::Database.new('db/energydle.db')
         db.execute('INSERT INTO users (username, pwdigest) VALUES (?,?)',username,password_digest)
         redirect('/')
     else
