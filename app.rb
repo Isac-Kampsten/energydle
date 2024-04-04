@@ -3,6 +3,7 @@ require 'slim'
 require 'sqlite3'
 require 'bcrypt'
 require 'sinatra/reloader'
+require 'json'
 
 get('/') do
     slim(:welcome)
@@ -57,3 +58,4 @@ post('/login') do
         "Fel lösenord"
     end
 end
+
