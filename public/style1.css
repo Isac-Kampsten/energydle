@@ -113,7 +113,16 @@ a:hover {
   
 }
 
+#classic-container h2{
+  margin: 0;
+  color: white;
+  font-size: 1.5em;
+  margin-top: 100px;
+}
+
+
 .search-box{
+  margin-top: 250px;
   width: 600px;
   background: #fff;
   margin: 200px, auto 0;
@@ -142,7 +151,14 @@ a:hover {
   background: transparent;
   border: 0;
   outline: 0;
+  border-radius: 5px;
+  padding: 10px 10px;
 }
+
+.search-box button:hover{
+  background: rgba(50, 62, 104, 0.2);
+}
+
 
 button .fa-solid{
   width: 25px;

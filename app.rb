@@ -5,6 +5,8 @@ require 'bcrypt'
 require 'sinatra/reloader'
 require 'json'
 
+enable :sessions
+
 get('/') do
     slim(:welcome)
 end
@@ -53,6 +55,8 @@ post('/login') do
     id = result["id"]
 
     if BCrypt::Password.new(pwdigest) == password
+        session[:user_id] = id
+        session[:username] = username
         redirect('/home')
     else
         "Fel lösenord"
@@ -68,4 +72,30 @@ post('/search') do
     # Example query: Fetch drink names matching the user input
     drinks = db.execute("SELECT Name FROM Drinks WHERE Name LIKE ?", "%#{input_value}%")
     drinks.map { |drink| drink['Name'] }.to_json # Convert result to JSON and return
-  end
+end
+
+#Route to update guesses junction table
+# This route handler receives the fetch request and saves the data
+
+post('/add_guess') do
+    #request.body.rewind
+    data = JSON.parse(request.body.read)
+    drink = data["drink"]
+    date = data["date"]
+
+    #logic to put it in guesses junction table
+    #code
+    #connect db
+    db = SQLite3::Database.new('db/energydle.db')
+    #get drink id from name
+    drink_id = db.execute("SELECT id FROM Drinks WHERE Name LIKE ?", "%#{drink}%").first
+    #insert recieved data
+    db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id, date)
+
+    #for testing purposes just puts in console
+    puts "Recieved drink: #{drink}, date: #{date}"
+
+    #return a succes response to the js file to let it know the request went through
+
+    status 200
+end

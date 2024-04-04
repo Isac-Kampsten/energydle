@@ -1,6 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const inputBox = document.getElementById("input-box");
     const resultBox = document.querySelector(".result-box ul");
+    const guessesBox = document.querySelector(".guesses-box")
+    const searchButton = document.getElementById("search-button")
+    
+    searchButton.onclick = function(){
+        add_guess(inputBox.value,Date.parse(Date()))
+    };
 
     inputBox.addEventListener("input", function() {
         const inputValue = inputBox.value.trim();
@@ -34,4 +40,26 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error("Error fetching suggestions:", error));
     }
+
+    function add_guess(drink,date){
+       fetch('add_guess',{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({drink: drink, date: date})
+       })
+
+       .then(response => {
+        if (response.ok){
+            console.log("Guess added");
+        } else {
+            console.log("Failed to add guess");
+        }
+       })
+
+       .catch(error => console.error("Error adding guess:",error))
+
+    }
+
 });

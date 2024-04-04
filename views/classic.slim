@@ -5,10 +5,16 @@ head
 div#classic-container
   h1 classic game
 
+  h2#your-guesses= "#{session[:username]}'s Guesses:"
+
+  div.guesses-box
+    ul
+
+
   div.search-box
     div.row
       input#input-box[type="text" placeholder="Enter Energy Drink Name" autocomplete="off"]
-      button
+      button#search-button
         i.fa-solid.fa-magnifying-glass
     div.result-box
       ul
