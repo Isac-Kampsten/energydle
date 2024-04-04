@@ -59,3 +59,13 @@ post('/login') do
     end
 end
 
+# Route for fetching suggestions based on user input
+post('/search') do
+    content_type :json # Set response content type to JSON
+    input_value = JSON.parse(request.body.read)['input'] # Parse input value from request body
+    db = SQLite3::Database.new('db/energydle.db')
+    db.results_as_hash = true
+    # Example query: Fetch drink names matching the user input
+    drinks = db.execute("SELECT Name FROM Drinks WHERE Name LIKE ?", "%#{input_value}%")
+    drinks.map { |drink| drink['Name'] }.to_json # Convert result to JSON and return
+  end
