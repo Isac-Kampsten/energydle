@@ -88,7 +88,8 @@ post('/add_guess') do
     #connect db
     db = SQLite3::Database.new('db/energydle.db')
     #get drink id from name
-    drink_id = db.execute("SELECT id FROM Drinks WHERE Name LIKE ?", "%#{drink}%").first
+    drink_id = db.execute("SELECT id FROM Drinks WHERE Name LIKE ?", "%#{drink}%").first.first
+
     #insert recieved data
     db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id, date)
 
