@@ -1,0 +1,28 @@
+if already_guessed_drinks = []
+        p already_guessed_drinks
+        p already_guessed_drinks.first
+        p "added cuz empty bruv wagwan cuh"
+        db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id, date)    
+
+    else
+
+        already_guessed_drinks.each do |drink|
+            p "we in boys"
+            if drink_id == drink.first
+                p "failed"
+                #give error
+                status 400
+            else
+                #add drink
+    
+                #insert recieved data
+                p "sucess"
+                db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id, date)
+    
+                #return a succes response to the js file to let it know the request went through
+                status 200
+            end
+    
+        end
+
+    end

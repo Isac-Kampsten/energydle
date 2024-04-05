@@ -82,6 +82,7 @@ post('/add_guess') do
     data = JSON.parse(request.body.read)
     drink = data["drink"]
     date = data["date"]
+    already_guessed = false
 
     #logic to put it in guesses junction table
     #code
@@ -90,13 +91,35 @@ post('/add_guess') do
     #get drink id from name
     drink_id = db.execute("SELECT id FROM Drinks WHERE Name LIKE ?", "%#{drink}%").first.first
 
-    #insert recieved data
-    db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id, date)
+    #check if user has already guessed this drink
 
-    #for testing purposes just puts in console
-    puts "Recieved drink: #{drink}, date: #{date}"
+    already_guessed_drinks = db.execute("SELECT drink_id FROM Guesses WHERE user_id LIKE ?", session[:user_id])
+    
+    #if already guessed drinks are empty then we're clear to execute
+    if already_guessed_drinks.first == nil
+        p "added cuz empty"
+        db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id,date)    
+    else
+        #go through every guessed drink and see if the current one already been guessed by this user
+        already_guessed_drinks.each do |drink|
 
-    #return a succes response to the js file to let it know the request went through
+            if drink_id == drink.first
+                already_guessed = true
+            end
+    
+        end
+    end
 
-    status 200
+    if already_guessed == false && already_guessed_drinks.first != nil
+        #this drink have not been guessed by this user and can be added to db
+        db.execute("INSERT INTO Guesses (user_id, drink_id, guessed_at) VALUES (?,?,?)", session[:user_id], drink_id, date)
+        p "this drink was not guessed and is now added"
+        status 200
+
+    elsif already_guessed == true
+        #this drink has already been guessed
+        p "you already guessed this"
+        status 500
+    end
+
 end

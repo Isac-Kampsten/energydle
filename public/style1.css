@@ -122,11 +122,13 @@ a:hover {
 
 
 .search-box{
-  margin-top: 250px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   width: 600px;
   background: #fff;
   margin: 200px, auto 0;
   border-radius: 5px;
+  
 }
 
 .row{
@@ -142,6 +144,7 @@ a:hover {
   border: 0;
   outline: 0;
   font-size: 18px;
+  transition: color 0.5 ease-in-out;
   color: #333;
 }
 
@@ -188,4 +191,21 @@ button .fa-solid{
   background-color: #e9f3ff;
 }
 
+.guesses-box {
+  background-color: #999;
+  width: 700px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.guess{
+  background-color: white;
+  width: 600px;
+  height: 100px;
+  margin-top: 20px;
+
+}
 

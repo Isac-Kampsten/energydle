@@ -55,6 +55,13 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Guess added");
         } else {
             console.log("Failed to add guess");
+            inputBox.style.transition = "color 0.5s ease-out";
+            inputBox.value = "You already guessed this one or perhaps you mispelled"
+            inputBox.style.color = "red"
+
+            setTimeout(() => {
+                inputBox.style.color = "#333";
+            }, 2000);
         }
        })
 
