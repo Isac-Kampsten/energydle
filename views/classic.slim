@@ -2,32 +2,36 @@ head
   script src="https://kit.fontawesome.com/a07b4aba9b.js" crossorigin="anonymous"
   script src="/search_box.js"
 
-div#classic-container
-  h1 classic game
+body#classic-body
 
-  h2#your-guesses= "#{session[:username]}'s Guesses:"
+  div#classic-container
+    h1 classic game
 
-  div.guesses-box
-    div.guess
-      p hej
-    div.guess
-      p hej
-    div.guess
-      p hej
-    div.guess
-      p hej
-    div.guess
-      p hej
-    div.guess
-      p hej
-    div.guess
-      p hej
+    h2#your-guesses= "#{session[:username]}'s Guesses:"
+
+    div.guesses-box
+      div.guess
+        p hej
+      div.guess
+        p hej
+      div.guess
+        p hej
+      div.guess
+        p hej
+      div.guess
+        p hej
+      div.guess
+        p hej
 
 
-  div.search-box
-    div.row
-      input#input-box[type="text" placeholder="Enter Energy Drink Name" autocomplete="off"]
-      button#search-button
-        i.fa-solid.fa-magnifying-glass
-    div.result-box
-      ul
+
+
+    div.search-box
+      div.row
+        input#input-box[type="text" placeholder="Enter Energy Drink Name" autocomplete="off"]
+        button#search-button
+          i.fa-solid.fa-magnifying-glass
+      div.result-box
+        ul
+    p#space_creation .
+     

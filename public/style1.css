@@ -17,6 +17,9 @@ nav {
   padding: 1em;
 }
 
+#space_creation{
+  color: #334;
+}
 
 a {
   text-decoration: none;
@@ -36,6 +39,9 @@ a:hover {
   background-color: #777;
 }
 
+#classic-body{
+  background-color: #334;
+}
 
 #home-gamemodes-container{
   display: flex;
@@ -118,6 +124,7 @@ a:hover {
   color: white;
   font-size: 1.5em;
   margin-top: 100px;
+  height: 2000px;
 }
 
 
@@ -192,7 +199,7 @@ button .fa-solid{
 }
 
 .guesses-box {
-  background-color: #999;
+  background-color: #9e9999;
   width: 700px;
   height: 100%;
   display: flex;
