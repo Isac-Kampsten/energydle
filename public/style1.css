@@ -48,7 +48,6 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #e0e0e0;
   height: 100%;
 }
 
@@ -74,7 +73,6 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #e0e0e0;
   height: 100%;
 }
 
@@ -212,7 +210,7 @@ button .fa-solid{
   background-color: white;
   width: 600px;
   height: 100px;
-  margin-top: 20px;
+  margin: 20px;
 
 }
 

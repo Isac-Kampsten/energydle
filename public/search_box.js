@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+
     function fetchSuggestions(inputValue) {
         fetch("/search", {
             method: "POST",
