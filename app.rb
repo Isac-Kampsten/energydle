@@ -69,7 +69,7 @@ post('/search') do
     input_value = JSON.parse(request.body.read)['input'] # Parse input value from request body
     db = SQLite3::Database.new('db/energydle.db')
     db.results_as_hash = true
-    # Example query: Fetch drink names matching the user input
+    # Look for drinks like the input in db
     drinks = db.execute("SELECT Name FROM Drinks WHERE Name LIKE ?", "%#{input_value}%")
     drinks.map { |drink| drink['Name'] }.to_json # Convert result to JSON and return
 end
@@ -122,4 +122,21 @@ post('/add_guess') do
         status 500
     end
 
+end
+
+get('/check_for_correct_drink_update') do
+
+    db = SQLite3::Database.new('db/energydle.db')
+    lastUpdate = db.execute("SELECT time_added from correct_drink").first.first
+
+    lastUpdate.to_s
+
+end
+
+get('/get_drinks') do
+
+    db = SQLite3::Database.new('db/energydle.db')
+    drink_arrays = db.execute("SELECT id from Drinks")
+    drinks = drink_arrays.map(&:first) # Extract first element from each array
+    drinks.to_json # Convert array to JSON and return
 end
