@@ -140,6 +140,9 @@ post('/update_correct_drink') do
     new_drink_date = data['date']
 
     db = SQLite3::Database.new('db/energydle.db')
+
+    #delete everything from guesses table
+    db.execute("DELETE FROM Guesses")
     
     #update the drink and date
     db.execute("UPDATE correct_drink SET id = ?, time_added = ?",new_drink,new_drink_date)
@@ -149,9 +152,15 @@ get('/get_drinks') do
 
     db = SQLite3::Database.new('db/energydle.db')
     drink_arrays = db.execute("SELECT id from Drinks")
+    current_correct_drink = db.execute("SELECT id from correct_drink").first.first
     drinks = drink_arrays.map(&:first) # Extract first element from each array
 
     #FIX LATER, REMOVE DRINK THAT'S CURRENTLY THE CORRECT DRINK FROM ARRAY
+    drinks.each_with_index do |element, index|
+        if element == current_correct_drink
+            drinks.delete_at(index)
+        end
+    end
 
     drinks.to_json # Convert array to JSON and return
 end
