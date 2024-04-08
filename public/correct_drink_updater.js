@@ -28,19 +28,48 @@ function checkForUpdate(){
                 })
                 .then(data => {
                     // Now 'data' contains the array of drinks
-                    console.log(data);
+                    //console.log(data);
+
+                    //NOW JUST CHOOSE A RANDOM ID FROM THIS FETCHED ARRAY AND MAKE A POST REQUEST THAT FIRST DELETES EVERYTHING IN
+                    // THE CORRET_DRINK TABLE AND THEN INSERTS THIS NEW DRINK AS WELL AS THE CURRENT TIME
+
+                    randomIndex = Math.floor(Math.random() * data.length);
+                    new_drink = data[randomIndex];
+
+                    //post request that sends the random drink
+                    fetch('/update_correct_drink',{
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ input: new_drink, date: Date.parse(Date()) })
+                    })
+
+                    .then(response =>{
+                        if (response.ok){
+                            console.log("updated correct drink");
+                        }else{
+                            console.log("failed to update drink");
+                        }
+                    })
+
+                    .catch(error => {
+                        console.error('Error updating correct drink:', error);
+                    })
+
                 })
                 .catch(error => {
                     console.error('Error fetching drinks:', error);
                 });
 
 
-            //NOW JUST CHOOSE A RANDOM ID FROM THIS FETCHED ARRAY AND MAKE A POST REQUEST THAT FIRST DELETES EVERYTHING IN
-            // THE CORRET_DRINK TABLE AND THEN INSERTS THIS NEW DRINK AS WELL AS THE CURRENT TIME
-
         }else{
             console.log("no need for update")
-        }
+            console.log(Date.parse(Date()))
+            console.log(lastUpdate)
+            console.log(((Date.parse(Date()) - lastUpdate)))
+
+        } 
     })
     .catch(error => {
         // Handle errors, such as network errors or failed responses

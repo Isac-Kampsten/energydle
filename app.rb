@@ -133,10 +133,25 @@ get('/check_for_correct_drink_update') do
 
 end
 
+post('/update_correct_drink') do
+
+    data = JSON.parse(request.body.read)
+    new_drink = data['input'] # Parse input value from request body
+    new_drink_date = data['date']
+
+    db = SQLite3::Database.new('db/energydle.db')
+    
+    #update the drink and date
+    db.execute("UPDATE correct_drink SET id = ?, time_added = ?",new_drink,new_drink_date)
+end
+
 get('/get_drinks') do
 
     db = SQLite3::Database.new('db/energydle.db')
     drink_arrays = db.execute("SELECT id from Drinks")
     drinks = drink_arrays.map(&:first) # Extract first element from each array
+
+    #FIX LATER, REMOVE DRINK THAT'S CURRENTLY THE CORRECT DRINK FROM ARRAY
+
     drinks.to_json # Convert array to JSON and return
 end
