@@ -173,3 +173,9 @@ get('/get_guesses') do
 
     guessed_drinks.to_json
 end
+
+get('/get_correct_drink_attributes') do
+
+    
+
+end
