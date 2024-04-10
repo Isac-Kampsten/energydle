@@ -83,4 +83,4 @@ function checkForUpdate(){
 //fetch all drinks and put them in an array
 
 
-setInterval(checkForUpdate, 8000)
+setInterval(checkForUpdate, 6000000)

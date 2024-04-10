@@ -164,3 +164,12 @@ get('/get_drinks') do
 
     drinks.to_json # Convert array to JSON and return
 end
+
+get('/get_guesses') do
+
+    db = SQLite3::Database.new('db/energydle.db')
+
+    guessed_drinks = db.execute("SELECT drink_id,guessed_at FROM Guesses WHERE user_id = ?",session[:user_id])
+
+    guessed_drinks.to_json
+end

@@ -123,6 +123,7 @@ a:hover {
   font-size: 1.5em;
   margin-top: 100px;
   height: 2000px;
+  margin-bottom: -550px;
 }
 
 
@@ -198,7 +199,7 @@ button .fa-solid{
 
 .guesses-box {
   background-color: #9e9999;
-  width: 700px;
+  width: 1200px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -207,10 +208,39 @@ button .fa-solid{
 }
 
 .guess{
-  background-color: white;
-  width: 600px;
+  padding: 20px 20px;
+  width: 900px;
   height: 100px;
   margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
 }
 
+.guess div{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(245, 245, 245);
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  border-style: solid;
+  border-color: whitesmoke;
+  border-width: 2px;
+  background-color: rgb(190, 40, 40);
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+
+}
+
+.guess p{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
