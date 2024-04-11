@@ -176,6 +176,25 @@ end
 
 get('/get_correct_drink_attributes') do
 
-    
+    db = SQLite3::Database.new('db/energydle.db')
 
+    correct_drink_id = db.execute("SELECT id FROM correct_drink")
+
+    correct_drink_attr = db.execute("SELECT * FROM Drinks WHERE id = ?",correct_drink_id).first
+    correct_drink_attr.pop()
+
+    correct_drink_attr.to_json
+
+
+end
+
+get('/get_guessed_drink_attributes') do
+    drink_id = params['drinkId'][0]
+
+    db = SQLite3::Database.new('db/energydle.db')
+
+    guessed_drink_attr = db.execute("SELECT * FROM Drinks WHERE id = ?",drink_id).first
+    guessed_drink_attr.pop()
+
+    guessed_drink_attr.to_json
 end

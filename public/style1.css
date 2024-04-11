@@ -107,6 +107,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 #classic-container h1{
@@ -123,7 +124,7 @@ a:hover {
   font-size: 1.5em;
   margin-top: 100px;
   height: 2000px;
-  margin-bottom: -550px;
+  margin-bottom: 0;
 }
 
 
