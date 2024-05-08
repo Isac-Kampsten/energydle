@@ -45,7 +45,6 @@ function renderGuesses() {
                                     // Render
                                     render(correct_drink_attr, guessed_drink_attr, guess_box);
                                     renderedGuesses.push(MostRecentlyAddedDrink[0])
-                                    console.log(renderedGuesses)
                                 });
                         })
                         .catch(error => {
@@ -62,6 +61,8 @@ function renderGuesses() {
 function render(correct_drink_attributes, guessed_drink_attributes, guess_box) {
     // Clear the guess_box content before rendering new attributes
     //guess_box.innerHTML = '';
+    console.log(guessed_drink_attributes[0] == correct_drink_attributes[0])
+
 
     // Create the outer div with class "guess"
     const outerDiv = document.createElement('div');
@@ -80,13 +81,32 @@ function render(correct_drink_attributes, guessed_drink_attributes, guess_box) {
 
         //change colors based on matches
 
-        if (index <= 1){
-            //check for name and brand
-            if (attribute == guessed_drink_attributes[index]){
-                div.style.backgroundColor = "green";
+        //if the name is correct everything should be green, OBS! LATER ADD won = 1 or something bombclat
+        if (guessed_drink_attributes[0] == correct_drink_attributes[0]){
+            div.style.backgroundColor = "pink";
+        } else if (correct_drink_attributes[1] == guessed_drink_attributes[1]){ //OBS DETTA KÖRS HELA TIDEN FIXA SÅ ATT DEN KOLLAR INDEX OCKSÅ MED && STATEMENT
+            div.style.backgroundColor = "green";
+        } else if (index == 2){
+            //first check if its the exact flavor/flavors
+            
+
+            if (correct_drink_attributes[2] == guessed_drink_attributes[2]){
+                div.style.backgroundColor = "yellow";
+            } else{
+                //split guessed drinks different flavors into an array and then use include() on the correct drinks flavors
+                let splitted_flavors_guessed = guessed_drink_attributes[2].trim().split(",")
+                let splitted_flavors_correct = correct_drink_attributes[2].trim().split(",")
+
+                if (splitted_flavors_correct.includes(splitted_flavors_guessed)){
+                    div.style.backgroundColor = "yellow";
+                }else{
+                    div.style.backgroundColor = "red"
+                }
             }
+
+
         }
-        
+
 
         // Append the paragraph element to the div element
         div.appendChild(p);
