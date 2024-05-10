@@ -83,8 +83,8 @@ function render(correct_drink_attributes, guessed_drink_attributes, guess_box) {
 
         //if the name is correct everything should be green, OBS! LATER ADD won = 1 or something bombclat
         if (guessed_drink_attributes[0] == correct_drink_attributes[0]){
-            div.style.backgroundColor = "pink";
-        } else if (correct_drink_attributes[1] == guessed_drink_attributes[1]){ //OBS DETTA KÖRS HELA TIDEN FIXA SÅ ATT DEN KOLLAR INDEX OCKSÅ MED && STATEMENT
+            div.style.backgroundColor = "green";
+        } else if (correct_drink_attributes[1] == guessed_drink_attributes[1] && index == 1){ //OBS DETTA KÖRS HELA TIDEN FIXA SÅ ATT DEN KOLLAR INDEX OCKSÅ MED && STATEMENT
             div.style.backgroundColor = "green";
         } else if (index == 2){
             //first check if its the exact flavor/flavors
@@ -94,13 +94,22 @@ function render(correct_drink_attributes, guessed_drink_attributes, guess_box) {
                 div.style.backgroundColor = "yellow";
             } else{
                 //split guessed drinks different flavors into an array and then use include() on the correct drinks flavors
-                let splitted_flavors_guessed = guessed_drink_attributes[2].trim().split(",")
-                let splitted_flavors_correct = correct_drink_attributes[2].trim().split(",")
 
-                if (splitted_flavors_correct.includes(splitted_flavors_guessed)){
+                let splitted_flavors_guessed = guessed_drink_attributes[2].split(",").map(item => item.trim());
+                let splitted_flavors_correct = correct_drink_attributes[2].split(",").map(item => item.trim());
+                let containsFlavor = null;
+
+                splitted_flavors_guessed.forEach(item =>{
+                    if (splitted_flavors_correct.includes(item)){
+                        containsFlavor = true;
+                    }
+                });
+                
+
+                if (containsFlavor == true){
                     div.style.backgroundColor = "yellow";
                 }else{
-                    div.style.backgroundColor = "red"
+                    div.style.backgroundColor = "red";
                 }
             }
 
